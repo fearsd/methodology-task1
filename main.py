@@ -1,43 +1,41 @@
-import math
-import random
+from games.gcd import play_game_gcd
+from games.progression import play_game_progression
 
 
-def generate_numbers():
-    return [random.randint(1, 100) for _ in range(3)]
+def show_menu():
+    print("Please choose a game to play:")
+    print("1. GCD Game")
+    print("2. Progression Game")
+    print("3. Exit")
 
 
-def calculate_lcm(numbers):
-    lcm = numbers[0]
-    for num in numbers[1:]:
-        lcm = lcm * num // math.gcd(lcm, num)
-    return lcm
+def get_user_choice():
+    while True:
+        try:
+            choice = int(input("Enter the number of the game: "))
+            if 1 <= choice <= 3:
+                return choice
+            else:
+                print("Please enter a number between 1 and 3.")
+        except ValueError:
+            print("Please enter a valid number.")
 
 
-def play_game():
-    print("Welcome to the Brain Games!")
-    name = input("May I have your name? ")
-    print(f"Hello, {name}!")
-    print("Find the smallest common multiple of given numbers.")
+def main():
+    while True:
+        show_menu()
+        choice = get_user_choice()
 
-    correct_answers = 0
-
-    while correct_answers < 3:
-        numbers = generate_numbers()
-        lcm = calculate_lcm(numbers)
-
-        print(f"Question: {' '.join(map(str, numbers))}")
-        user_answer = int(input("Your answer: "))
-
-        if user_answer == lcm:
-            print("Correct!")
-            correct_answers += 1
-        else:
-            print(f"'{user_answer}' is wrong answer ;(. Correct answer was '{lcm}'.")
-            print(f"Let's try again, {name}!")
-            return
-
-    print(f"Congratulations, {name}!")
+        if choice == 1:
+            print("\nStarting GCD Game...\n")
+            play_game_gcd()
+        elif choice == 2:
+            print("\nStarting Progression Game...\n")
+            play_game_progression()
+        elif choice == 3:
+            print("Goodbye!")
+            break
 
 
 if __name__ == "__main__":
-    play_game()
+    main()

@@ -11,7 +11,7 @@ def hide_element(progression, index):
     return progression
 
 
-def generate_question():
+def generate_question_and_answer():
     start = random.randint(1, 10)
     ratio = random.randint(2, 5)
     length = random.randint(5, 10)
@@ -21,16 +21,13 @@ def generate_question():
     hidden_value = progression[hidden_index]
     progression_with_hidden = hide_element(progression.copy(), hidden_index)
 
-    return " ".join(map(str, progression_with_hidden)), hidden_value
-
-
-def get_correct_answer(question):
-    return question[1]
+    question = " ".join(map(str, progression_with_hidden))
+    return question, hidden_value
 
 
 def play_game_progression():
     game_description = "What number is missing in the progression?"
-    run_game(game_description, generate_question, get_correct_answer)
+    run_game(game_description, generate_question_and_answer)
 
 
 if __name__ == "__main__":

@@ -1,4 +1,4 @@
-from games.gcd import play_game_gcd
+from games.lcm import play_game_lcm
 from games.progression import play_game_progression
 
 
@@ -27,8 +27,8 @@ def main():
         choice = get_user_choice()
 
         if choice == 1:
-            print("\nStarting GCD Game...\n")
-            play_game_gcd()
+            print("\nStarting LCM Game...\n")
+            play_game_lcm()
         elif choice == 2:
             print("\nStarting Progression Game...\n")
             play_game_progression()

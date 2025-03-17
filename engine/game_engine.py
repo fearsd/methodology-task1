@@ -1,4 +1,4 @@
-def run_game(game_description, generate_question, get_correct_answer):
+def run_game(game_description, generate_question_and_answer):
     print("Welcome to the Brain Games!")
     name = input("May I have your name? ")
     print(f"Hello, {name}!")
@@ -8,9 +8,7 @@ def run_game(game_description, generate_question, get_correct_answer):
     max_rounds = 3
 
     while correct_answers < max_rounds:
-        question = generate_question()
-        correct_answer = get_correct_answer(question)
-
+        question, correct_answer = generate_question_and_answer()
         print(f"Question: {question}")
         user_answer = input("Your answer: ")
 

@@ -1,4 +1,5 @@
 import random
+from engine.game_engine import run_game
 
 
 def generate_geometric_progression(start, ratio, length):
@@ -10,42 +11,26 @@ def hide_element(progression, index):
     return progression
 
 
+def generate_question():
+    start = random.randint(1, 10)
+    ratio = random.randint(2, 5)
+    length = random.randint(5, 10)
+    progression = generate_geometric_progression(start, ratio, length)
+
+    hidden_index = random.randint(0, length - 1)
+    hidden_value = progression[hidden_index]
+    progression_with_hidden = hide_element(progression.copy(), hidden_index)
+
+    return " ".join(map(str, progression_with_hidden)), hidden_value
+
+
+def get_correct_answer(question):
+    return question[1]
+
+
 def play_game_progression():
-    print("Welcome to the Geometry Progression Game!")
-    name = input("May I have your name? ")
-    print(f"Hello, {name}!")
-
-    while True:
-        start = random.randint(1, 10)
-        ratio = random.randint(2, 5)
-        length = random.randint(5, 10)
-        progression = generate_geometric_progression(start, ratio, length)
-
-        hidden_index = random.randint(0, length - 1)
-        hidden_value = progression[hidden_index]
-        progression_with_hidden = hide_element(progression.copy(), hidden_index)
-
-        print("What number is missing in the progression?")
-        print("Question:", " ".join(map(str, progression_with_hidden)))
-
-        user_answer = input("Your answer: ")
-
-        try:
-            user_answer = int(user_answer)
-        except ValueError:
-            print("Please enter a valid number.")
-            continue
-
-        if user_answer == hidden_value:
-            print("Correct!")
-        else:
-            print(
-                f"'{user_answer}' is wrong answer ;(. Correct answer was '{hidden_value}'."
-            )
-            print(f"Let's try again, {name}!")
-            break
-
-    print(f"Congratulations, {name}!")
+    game_description = "What number is missing in the progression?"
+    run_game(game_description, generate_question, get_correct_answer)
 
 
 if __name__ == "__main__":
